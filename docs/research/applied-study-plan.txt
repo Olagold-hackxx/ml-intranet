@@ -1,0 +1,297 @@
+Applied Machine Learning
+
+A 12-Month Chapter-by-Chapter Study Plan
+
+Built from Stanford CS229, CS221, CS230, CS231N, CS224N, CS224U, CS236, CS234, CS329H, CS336, CME295, and related lectures.
+
+Page 1 of 2 — see companion doc for Theoretical ML track.
+
+How to use this plan
+
+This plan sequences 13 Stanford-level courses into a single 12-month curriculum (≈10–12 hours/week). It is chapter-by-chapter: each row tells you which specific lectures to watch that week and what to produce by the end of the week. You do not watch every course front-to-back in order — that would mean 300+ hours of overlapping foundations. Instead, the plan interleaves courses by topic so that what you learn one week feeds directly into the next.
+
+Structure:
+
+-   Phase 1 — Foundations (Weeks 1–8): classical ML, math, and the learning framework.
+
+-   Phase 2 — Deep Learning Core (Weeks 9–16): neural nets, CNNs, training at scale.
+
+-   Phase 3 — Sequence Models & NLP (Weeks 17–26): from RNNs to transformers to LLMs.
+
+-   Phase 4 — Generative Models & RL (Weeks 27–36): VAEs, diffusion, GANs, RL, RLHF.
+
+-   Phase 5 — Frontier & Systems (Weeks 37–48): LLMs from scratch, evaluation, scaling, capstone.
+
+Weekly routine (recommended):
+
+-   2–3 lectures (≈3–4 hours)
+
+-   Course problem set or paper reading (≈3 hours)
+
+-   One hands-on implementation in PyTorch or JAX (≈3–4 hours)
+
+-   Short written summary — one page in your own words, per week (≈1 hour)
+
+Rule of thumb: if a course's first 2–3 lectures cover material you already know cold from another course, skip to where it diverges. The table tells you where courses overlap.
+
+Course codes used in this plan
+
+  -------------------------------------------------------------------------------------
+  Code         Course
+  ------------ ------------------------------------------------------------------------
+  CS229        Machine Learning — Andrew Ng (classical ML foundations)
+
+  CS221        Artificial Intelligence: Principles & Techniques (search, MDPs, logic)
+
+  CS230        Deep Learning (practical deep learning, hyperparameters, projects)
+
+  CS231N       Computer Vision with Deep Learning (CNNs, detection, segmentation)
+
+  CS224N       NLP with Deep Learning (word vectors, RNNs, transformers, pretraining)
+
+  CS224U       Natural Language Understanding (semantics, retrieval, NLU tasks)
+
+  CS236        Deep Generative Models (VAEs, flows, GANs, diffusion, EBMs)
+
+  CS234        Reinforcement Learning (MDPs, policy gradients, deep RL)
+
+  CS329H       Machine Learning from Human Preferences (RLHF, alignment)
+
+  CS336        Language Models from Scratch (tokenization, training, infra)
+
+  CME295       Transformers & LLMs (architecture deep-dive, inference, agents)
+
+  EVAL/SC      LLM Evaluation & Scaling playlist
+  -------------------------------------------------------------------------------------
+
+Phase 1 — Foundations (Weeks 1–8)
+
+Goal: build the mathematical and conceptual spine for everything else. By the end of Phase 1 you should be able to derive linear & logistic regression from scratch, explain bias-variance and regularization clearly, and implement a small neural net without a framework.
+
+CS229 — chapter-by-chapter focus
+
+  -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Week   Course             Lectures / Chapters                                                                        Focus & Deliverable
+  ------ ------------------ ------------------------------------------------------------------------------------------ --------------------------------------------------------------------------------------------------------------------
+  1      CS229              Lec 1–2: Intro, Linear Regression, Gradient Descent, Normal Equations                      Derive normal equations. Implement batch & stochastic GD on a toy dataset from scratch in NumPy.
+
+  2      CS229              Lec 3–4: Locally Weighted Regression, Logistic Regression, Newton's Method                 Implement logistic regression on MNIST (binary 0-vs-1). Compare GD vs Newton's convergence.
+
+  3      CS229 + CS221      CS229 Lec 5–6 (GLMs, Generative Learning, Naive Bayes, Laplace) + CS221 Lec 1 (Overview)   Write a one-page note on when to prefer discriminative vs generative models.
+
+  4      CS229              Lec 7–8: Kernels, SVMs, Soft Margin                                                        Implement SMO on a 2D toy dataset. Visualize decision boundary for linear vs RBF kernel.
+
+  5      CS229              Lec 9–10: Bias/Variance, Regularization, Model Selection, Advice for ML Projects           Read Andrew Ng's 'Machine Learning Yearning' chapters 1–20 alongside. Produce a checklist of debugging heuristics.
+
+  6      CS229              Lec 11–13: Decision Trees, Ensembles, Neural Nets (intro), Backprop                        Implement a 2-layer MLP in NumPy only. Derive backprop by hand for one scalar example.
+
+  7      CS229 + CS221      CS229 Lec 14–15 (EM, Factor Analysis, PCA) + CS221 search/MDP overview                     Implement k-means and PCA. Apply to MNIST and visualize the first 2 principal components.
+
+  8      CS229              Lec 16–18: ICA, Reinforcement Learning intro, MDPs, Value Iteration                        Implement value iteration on gridworld. This bridges you into CS234 later.
+  -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Phase 1 deliverables
+
+-   A small GitHub repo titled foundations-ml with NumPy implementations of: linear regression, logistic regression, SVM (linear & kernel), MLP, k-means, PCA.
+
+-   An 8-page note (one page per week) summarizing key derivations and intuitions in your own words.
+
+-   One mini-project: Titanic or a comparable Kaggle dataset solved with three different classical models and a short write-up comparing them.
+
+Phase 2 — Deep Learning Core (Weeks 9–16)
+
+Goal: become fluent in modern deep learning. By the end you should be comfortable training CNNs on image tasks, diagnosing training problems (dead ReLUs, exploding gradients, bad initialization), and using a deep learning framework idiomatically.
+
+CS230 + CS231N — interleaved
+
+  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Week   Course             Lectures / Chapters                                                                               Focus & Deliverable
+  ------ ------------------ ------------------------------------------------------------------------------------------------- -----------------------------------------------------------------------------------------------------------
+  9      CS230              Lec 1–2: DL Intuition, Full-cycle DL Project                                                      Switch to PyTorch. Re-implement your Phase 1 MLP in PyTorch. Train on Fashion-MNIST.
+
+  10     CS231N             Lec 1–3: Image classification, Linear classifiers, Loss & Optimization                            Implement softmax + SVM loss from scratch. Train on CIFAR-10.
+
+  11     CS231N             Lec 4–5: Backprop & Neural Nets, Convolutional Networks                                           Implement a 2-layer CNN from scratch (forward + backward for conv & max-pool).
+
+  12     CS231N + CS230     CS231N Lec 6–7 (Training NNs I & II), CS230 Lec 3 (hyperparameter tuning)                         Produce a personal checklist: initialization, normalization, learning-rate schedules, regularization.
+
+  13     CS231N             Lec 8–9: Deep learning software, CNN architectures (AlexNet → ResNet → ViT)                       Reproduce a ResNet-18 on CIFAR-10. Track with Weights & Biases or tensorboard.
+
+  14     CS231N             Lec 10–11: RNNs intro (note: legacy), Detection & Segmentation (Faster R-CNN, Mask R-CNN, DETR)   Skim RNN lecture — deeper coverage comes in Phase 3. Do a detection mini-project with a pretrained model.
+
+  15     CS231N + CS230     CS231N Lec 12–13 (Visualizing & Generative models preview), CS230 case studies                    Write a one-page summary of what filters in a trained CNN actually learn.
+
+  16     CS230              Remaining case-study lectures + full-cycle project lecture                                        Start a personal project: end-to-end image task of your own choosing, deployed somewhere.
+  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Phase 2 deliverables
+
+-   Reproduced ResNet-18 on CIFAR-10 matching published accuracy within 1%.
+
+-   One end-to-end vision project: pick a real-world dataset, train a model, serve it via a minimal FastAPI endpoint or Gradio demo.
+
+-   A 'deep learning debugging playbook' document you maintain from now on.
+
+Phase 3 — Sequence Models & NLP (Weeks 17–26)
+
+Goal: master sequence modeling from word vectors to transformers to pretrained LLMs. This is the longest phase because NLP is where most current frontier work lives, and CS224N + CS224U + CME295 reinforce each other.
+
+CS224N + CS224U + CME295 — interleaved
+
+  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Week   Course             Lectures / Chapters                                                                        Focus & Deliverable
+  ------ ------------------ ------------------------------------------------------------------------------------------ -------------------------------------------------------------------------------------------------------------------
+  17     CS224N             Lec 1–2: Intro & Word Vectors, Word2Vec details                                            Train word2vec on a small corpus. Visualize analogies (king − man + woman).
+
+  18     CS224N             Lec 3–4: Backprop for NLP, Dependency Parsing                                              Implement a neural dependency parser (arc-standard). Use the course assignment as guide.
+
+  19     CS224N             Lec 5–6: Language Models & RNNs, LSTMs & Vanishing Gradients                               Train a char-level LSTM language model on Shakespeare. Sample generations.
+
+  20     CS224N             Lec 7–8: Translation, Seq2Seq, Attention                                                   Implement seq2seq with attention for a toy translation task (e.g. date normalization).
+
+  21     CS224N + CME295    CS224N Lec 9 (Self-Attention & Transformers) + CME295 Lec 1–2 (Transformer architecture)   Implement the full Transformer from scratch in PyTorch (~300 lines). This is the most important week in the plan.
+
+  22     CS224N             Lec 10–11: Pretraining (BERT, T5, GPT), Prompting & RLHF preview                           Fine-tune DistilBERT on a text classification dataset. Compare against a from-scratch transformer baseline.
+
+  23     CME295             Lec 3–4: Scaling, positional encodings deep-dive, KV-cache, efficient attention            Implement Rotary Position Embeddings and a KV-cache on your Phase 3 Week 5 transformer.
+
+  24     CS224N + CS224U    CS224N Lec 12–13 (QA, NL Generation) + CS224U intro lectures (semantics, tasks)            Build a simple retrieval-augmented QA over a small document set.
+
+  25     CS224U             Lec on sentence meaning, grounded language, retrieval & embeddings                         Fine-tune a sentence-embedding model (e.g. SBERT) for semantic search on your own corpus.
+
+  26     CME295             Agents, tool use, multimodal models lectures                                               Mini-project: build a small ReAct-style agent using an open-source LLM + a Python tool.
+  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Phase 3 deliverables
+
+-   A from-scratch Transformer you understand line-by-line, published on GitHub with a README that derives the attention equation.
+
+-   One NLP application: semantic search, QA system, or small agent — your choice.
+
+-   Annotated notes on the original papers: Transformer, BERT, GPT-2, T5, RoPE.
+
+Phase 4 — Generative Models & Reinforcement Learning (Weeks 27–36)
+
+Goal: understand modern generative modeling (beyond language) and the reinforcement-learning foundations that underpin RLHF. CS236 and CS234 run in parallel, with CS329H pulling them together at the end.
+
+CS236 — Deep Generative Models
+
+  --------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Week   Course             Lectures / Chapters                                               Focus & Deliverable
+  ------ ------------------ ----------------------------------------------------------------- ------------------------------------------------------------------
+  27     CS236              Lec 1–2: Intro, Autoregressive models (PixelCNN, NADE, RNN-LMs)   Train a PixelCNN on MNIST. Sample images.
+
+  28     CS236              Lec 3–4: Variational Autoencoders                                 Implement a VAE on MNIST. Interpolate in latent space.
+
+  29     CS236              Lec 5–6: Normalizing Flows, GANs                                  Read the NICE and RealNVP papers. Train a small GAN.
+
+  30     CS236              Lec 7–9: Energy-Based Models, Score matching, Diffusion models    Implement DDPM on MNIST from scratch. Biggest win of this phase.
+  --------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CS234 — Reinforcement Learning (parallel track)
+
+  -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Week   Course             Lectures / Chapters                                      Focus & Deliverable
+  ------ ------------------ -------------------------------------------------------- ------------------------------------------------------------------------------------
+  31     CS234              Lec 1–2: Intro, Tabular MDPs, Value/Policy Iteration     Re-do gridworld from Phase 1 with policy iteration. Compare sample efficiency.
+
+  32     CS234              Lec 3–4: Model-free: MC, TD, Q-learning, SARSA           Implement tabular Q-learning on CliffWalking.
+
+  33     CS234              Lec 5–7: Value function approximation, DQN, Double DQN   Train DQN on CartPole. Then scale to a simple Atari game.
+
+  34     CS234              Lec 8–10: Policy Gradients, Actor-Critic, PPO            Implement REINFORCE, then A2C, then PPO on CartPole. Observe variance differences.
+  -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CS329H — ML from Human Preferences (synthesis)
+
+  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Week   Course             Lectures / Chapters                                                            Focus & Deliverable
+  ------ ------------------ ------------------------------------------------------------------------------ ------------------------------------------------------------------------------------------
+  35     CS329H             Lec 1–3: Introduction to preference learning, reward modeling, RLHF pipeline   Read InstructGPT paper. Diagram the full SFT → RM → PPO pipeline on one page.
+
+  36     CS329H             Lec 4–6: DPO, alternatives to RLHF, alignment challenges                       Implement DPO on a tiny preference dataset (e.g. from the paper's Hugging Face release).
+  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Phase 4 deliverables
+
+-   Working implementations of: VAE, GAN, DDPM, DQN, PPO, DPO.
+
+-   One synthesis essay (~1500 words) on the thread connecting: MLE → VAE → RL policy gradient → RLHF → DPO.
+
+Phase 5 — Frontier & Systems (Weeks 37–48)
+
+Goal: go from understanding LLMs conceptually to training, scaling, and evaluating them yourself. This phase is the integration of everything before. The capstone project replaces isolated problem sets.
+
+CS336 — Language Models from Scratch
+
+  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Week   Course             Lectures / Chapters                                                                     Focus & Deliverable
+  ------ ------------------ --------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------
+  37     CS336              Lec 1–2: Course overview, Byte-pair encoding tokenization, data pipelines               Implement BPE from scratch. Tokenize a 100MB text corpus.
+
+  38     CS336              Lec 3–4: Architecture choices (pre-norm, SwiGLU, RoPE, GQA), mixed precision            Refactor your Phase 3 transformer to modern architecture. Benchmark speed vs the original.
+
+  39     CS336              Lec 5–6: Training infrastructure, ZeRO/FSDP, gradient checkpointing, data parallelism   Read the FSDP paper. Note: you likely won't have multi-GPU — focus on single-GPU optimizations.
+
+  40     CS336              Lec 7–8: Scaling laws, data curation, curriculum                                        Train a ~50M-parameter LM on TinyStories or a subset of FineWeb. Plot a small scaling curve.
+
+  41     CS336              Lec 9–10: Post-training: SFT, RLHF, DPO at LM scale                                     Fine-tune your small LM with DPO on a preference dataset you construct.
+  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+EVAL/SC — LLM Evaluation & Scaling
+
+  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Week   Course             Lectures / Chapters                                                Focus & Deliverable
+  ------ ------------------ ------------------------------------------------------------------ ------------------------------------------------------------------------------
+  42     EVAL/SC            Evaluation fundamentals, MMLU/HellaSwag/BIG-bench, contamination   Evaluate your Phase 5 Week 4 LM on 2–3 standard benchmarks. Report honestly.
+
+  43     EVAL/SC            LLM-as-judge, eval reliability, red-teaming                        Design an eval for a capability your own model plausibly has. Run it.
+
+  44     EVAL/SC            Scaling laws in depth, compute-optimal training (Chinchilla)       Read the Chinchilla paper carefully. Write a 2-page summary.
+  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Capstone (Weeks 45–48)
+
+Pick one of the three tracks below and spend four full weeks on it. The deliverable is a public write-up plus code.
+
+-   Track A — Training track: Train a domain-specific small LM (e.g. legal, medical, or code) end-to-end: data collection, tokenizer, pretraining, SFT, evaluation.
+
+-   Track B — Research-reproduction track: Reproduce a recent paper of your choice (e.g. DPO, Mamba, Mixture-of-Experts). Write a detailed reproduction report with ablations.
+
+-   Track C — Applied-systems track: Build a production-grade agent or RAG system with retrieval, evaluation harness, and monitoring. Treat it like a real product.
+
+Final deliverables
+
+-   A portfolio repository containing every week's work, with a top-level README that tells the story of the year.
+
+-   A capstone write-up (5–10 pages) posted publicly.
+
+-   A list of 5 open questions the year raised for you — these become your research direction.
+
+Practical notes on pacing, skipping, and reading alongside
+
+When to skip lectures
+
+Several of these courses overlap heavily — especially the first 3–4 lectures of CS229, CS230, CS224N, and CS231N, which all re-introduce gradient descent and neural networks. Once you have done it once (in CS229), skip those lectures in later courses and jump to where the course specializes. The plan above already does this interleaving, but use your judgment if a lecture feels fully redundant.
+
+Books to read alongside
+
+-   During Phase 1: 'Pattern Recognition and Machine Learning' (Bishop) or 'The Elements of Statistical Learning' (Hastie, Tibshirani, Friedman). Pick one, don't switch.
+
+-   During Phase 2–3: 'Deep Learning' (Goodfellow, Bengio, Courville) for the theory chapters, and Sebastian Raschka's 'Build a Large Language Model (From Scratch)' as a practical companion to CS336.
+
+-   During Phase 4: 'Reinforcement Learning: An Introduction' (Sutton & Barto), second edition — the canonical RL text.
+
+Papers to read — minimum viable set
+
+-   Phase 2: AlexNet, VGG, ResNet, BatchNorm, Dropout, Adam.
+
+-   Phase 3: Word2Vec, Attention Is All You Need, BERT, GPT-2, T5, RoPE, FlashAttention.
+
+-   Phase 4: VAE (Kingma & Welling), GAN (Goodfellow), DDPM (Ho et al.), DQN (Mnih), PPO (Schulman), InstructGPT, DPO.
+
+-   Phase 5: Chinchilla, LLaMA, Mixtral, the original RLHF paper (Christiano et al. 2017).
+
+Self-assessment — what it should feel like at the end
+
+If the plan has worked, by Week 48 you should be able to do three things without looking anything up: (1) write down the loss, architecture, and training procedure for any of VAE, GAN, diffusion, transformer LM, PPO, DPO; (2) look at a deep-learning training curve and give a short list of plausible bugs and fixes; (3) read a new paper on arXiv and place it accurately in the taxonomy of the field. If any of those three feels shaky, go back and identify the week where the gap started.

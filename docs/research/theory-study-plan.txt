@@ -1,0 +1,215 @@
+Theoretical Machine Learning
+
+A 6-Month Chapter-by-Chapter Study Plan
+
+Built from Shai Ben-David's 'Understanding Machine Learning' (UWaterloo 2015) and Stanford CS229M.
+
+Page 2 of 2 — companion to the Applied ML plan.
+
+How this plan differs from the applied track
+
+The applied track teaches you how to build ML systems. This track teaches you why they work, when they are guaranteed to work, and what their fundamental limitations are. It is shorter in weeks (≈24) but denser per week — expect to spend as much time on one proof as you would on a whole applied lecture.
+
+You will only need three things:
+
+-   A textbook. The companion book for Ben-David's course is 'Understanding Machine Learning: From Theory to Algorithms' by Shalev-Shwartz and Ben-David. This is the single most important resource in this plan — the course IS the book.
+
+-   Paper and pen. Theoretical ML is done on paper, not on a keyboard. Budget at least 60% of your time to working through proofs by hand.
+
+-   Mathematical maturity. Real analysis, linear algebra, probability (measure-theoretic is a plus but not required). If any of these is shaky, fix it first; the rest of the plan assumes them.
+
+Prerequisites: honest self-check
+
+Before starting Week 1, you should be able to, without looking anything up:
+
+-   State and prove Markov's inequality, Chebyshev's inequality, and Hoeffding's inequality.
+
+-   State the weak and strong laws of large numbers and sketch their proofs.
+
+-   Compute expectations and variances for standard distributions (Bernoulli, Binomial, Gaussian).
+
+-   Diagonalize a symmetric matrix; state the spectral theorem.
+
+-   Work comfortably with epsilon-delta definitions, suprema/infima, and convergence of sequences.
+
+If any of these is not solid, spend 2–4 weeks on Ross's 'A First Course in Probability' and Axler's 'Linear Algebra Done Right' before starting this plan. The time saved later is enormous.
+
+Plan overview
+
+The plan is split into two passes:
+
+-   Pass 1 (Weeks 1–12) — Classical statistical learning theory with Ben-David's 'Understanding Machine Learning' course. This is the foundation. You learn PAC learning, VC dimension, uniform convergence, boosting, SVMs, convex learning, and regularization — all with proofs.
+
+-   Pass 2 (Weeks 13–24) — Modern learning theory with Stanford CS229M. This builds on Pass 1 to cover concentration in high dimensions, uniform convergence refinements, online learning, and the theoretical frontier around overparameterized models.
+
+Each week's row tells you exactly which lectures, which chapter(s) of Shalev-Shwartz & Ben-David (SSBD), which theorems to internalize, and which end-of-chapter exercises to complete. The 'exercises' column is non-negotiable — you do not understand a theorem until you have used it in a problem.
+
+Pass 1 — Classical Statistical Learning Theory (Weeks 1–12)
+
+Primary source: Shai Ben-David's 'Understanding Machine Learning' lectures (UWaterloo Winter 2015). Companion text: SSBD (Shalev-Shwartz & Ben-David), 'Understanding Machine Learning: From Theory to Algorithms'.
+
+Part I — The PAC framework
+
+  -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Week   Source              Lectures / Chapters                                       Theorems to master & exercises
+  ------ ------------------- --------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------
+  1      Ben-David Lec 1–2   SSBD Ch. 1–2: A gentle start, formal learning model       Master: ERM, realizability, the finite hypothesis-class bound. Prove: finite H is PAC-learnable. Exercises 2.1–2.3.
+
+  2      Ben-David Lec 3–4   SSBD Ch. 3: PAC learning (general & agnostic)             Master: agnostic PAC, uniform convergence ⇒ learnability. Prove: Thm 3.3 (AP-learnability of finite classes). Exercises 3.1–3.3.
+
+  3      Ben-David Lec 5     SSBD Ch. 4: Learning via uniform convergence              Master: the uniform convergence property, ε-representative samples. Prove all lemmas in Ch. 4. Ex 4.1–4.2.
+
+  4      Ben-David Lec 6     SSBD Ch. 5: The bias-complexity tradeoff, No Free Lunch   Master: approximation vs. estimation error decomposition. Prove: No Free Lunch theorem (Thm 5.1). Ex 5.1–5.3.
+  -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Part II — VC dimension & the fundamental theorem
+
+  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Week   Source              Lectures / Chapters                                               Theorems to master & exercises
+  ------ ------------------- ----------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------
+  5      Ben-David Lec 7–8   SSBD Ch. 6: VC dimension                                          Master: shattering, growth function, Sauer's lemma. Prove: Sauer–Shelah lemma. Ex 6.1–6.5.
+
+  6      Ben-David Lec 9     SSBD Ch. 6 (cont.): Fundamental Theorem of Statistical Learning   Prove: finite VC ⇔ PAC learnable ⇔ uniform convergence. This is the single most important theorem of the course. Rewrite the proof from memory.
+
+  7      Ben-David Lec 10    SSBD Ch. 7: Nonuniform learnability, SRM, Occam's razor           Master: SRM principle, MDL bounds. Prove: consistency of SRM. Ex 7.1–7.2.
+
+  8      Ben-David Lec 11    SSBD Ch. 8: Computational complexity of learning                  Master: efficient PAC learning, hardness results. Understand why some PAC-learnable classes are not efficiently learnable.
+  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Part III — Algorithmic theory
+
+  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Week   Source                Lectures / Chapters                                                       Theorems to master & exercises
+  ------ --------------------- ------------------------------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------
+  9      Ben-David Lec 12–13   SSBD Ch. 9–10: Linear predictors, Boosting                                Master: the Perceptron mistake bound; AdaBoost training-error bound (Thm 10.2). Ex 9.1–9.2, 10.1–10.3.
+
+  10     Ben-David Lec 14      SSBD Ch. 11–12: Model selection & validation, Convex learning problems    Master: validation bounds; Lipschitz/smooth/strongly convex losses. Ex 12.1–12.3.
+
+  11     Ben-David Lec 15      SSBD Ch. 13–14: Regularization & Stability, Stochastic Gradient Descent   Master: RLM, algorithmic stability ⇒ generalization. Prove: stability of RLM (Thm 13.2). SGD convergence for convex Lipschitz functions.
+
+  12     Ben-David Lec 16      SSBD Ch. 15–16: SVMs, Kernel methods                                      Master: margin-based generalization bound; Representer theorem. Ex 15.1–15.3. Write a one-page summary tying all of Pass 1 together.
+  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Pass 1 deliverables
+
+-   A handwritten (or LaTeX) notebook with every major theorem re-proved in your own words.
+
+-   Solutions to at least 30 exercises from SSBD — this is the minimum to claim mastery.
+
+-   A 5-page synthesis essay: 'What is the Fundamental Theorem of Statistical Learning really saying?' Written entirely from memory.
+
+Pass 2 — Modern Learning Theory (Weeks 13–24)
+
+Primary source: Stanford CS229M (Machine Learning Theory). This course assumes you have done something like Pass 1; it covers the more modern, high-dimensional, and concentration-heavy material that has become central in the last decade. Lecture numbers below track the playlist ordering; adjust as needed to match the actual playlist you're watching.
+
+Part I — Concentration & generalization tools
+
+  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Week   Source             Lectures / Chapters                                                                Theorems to master & exercises
+  ------ ------------------ ---------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------
+  13     CS229M Lec 1–2     Course overview, asymptotic statistics recap (CLT, delta method), asymptotic MLE   Re-derive the asymptotic normality of the MLE. Write out Fisher information from two definitions and show they match.
+
+  14     CS229M Lec 3       Concentration inequalities: sub-Gaussian, sub-exponential, Bernstein               Prove: Hoeffding, Bernstein, Bennett. Redo the proofs using the Chernoff-bound recipe. Do at least 3 exercises from Vershynin Ch. 2.
+
+  15     CS229M Lec 4       Uniform convergence & Rademacher complexity                                        Master: the symmetrization argument. Prove: generalization bound in terms of Rademacher complexity. Compute Rademacher complexity for linear classes.
+
+  16     CS229M Lec 5       Covering numbers, Dudley's integral, chaining                                      Prove: Dudley's entropy bound. Compute covering numbers for L2 balls.
+  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Part II — Margin theory & kernels
+
+  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Week   Source             Lectures / Chapters                                      Theorems to master & exercises
+  ------ ------------------ -------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------
+  17     CS229M Lec 6       Margin bounds, Rademacher complexity of linear classes   Prove: the margin-based generalization bound. Connect to Pass 1 Week 12 SVM bound — same result, different proof style.
+
+  18     CS229M Lec 7       Kernel methods, RKHS generalization                      Prove: the Representer Theorem from the RKHS-functional-analysis perspective. Contrast with Pass 1's derivation.
+  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Part III — Deep learning theory
+
+  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Week   Source             Lectures / Chapters                                                    Theorems to master & exercises
+  ------ ------------------ ---------------------------------------------------------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  19     CS229M Lec 8       Non-convex optimization: local minima, saddle points, escape results   Read and summarize: Ge–Huang–Jin–Yuan (2015) on escaping saddle points.
+
+  20     CS229M Lec 9       Implicit regularization of gradient descent (linear & logistic)        Prove: GD on separable logistic regression converges in direction to the max-margin solution (Soudry et al. 2018). This is a modern classic — spend the full week on it.
+
+  21     CS229M Lec 10      Neural tangent kernel (NTK), infinite-width networks                   Read Jacot et al. (2018). Derive the NTK for a 2-layer ReLU network by hand. Understand the lazy-training regime.
+
+  22     CS229M Lec 11      Double descent, benign overfitting, interpolation                      Read Belkin et al. (2019). Reconcile 'benign overfitting' with the classical bias-variance tradeoff from Pass 1 Week 4.
+  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Part IV — Online learning & synthesis
+
+  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Week   Source                           Lectures / Chapters                                                                 Theorems to master & exercises
+  ------ -------------------------------- ----------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------
+  23     CS229M Lec 12                    Online learning, regret minimization, follow-the-regularized-leader, OGD, EG        Prove: regret bound for FTRL with appropriate regularizer. Master the online-to-batch conversion argument.
+
+  24     CS229M Lec 13+ / capstone week   Remaining lectures (covariate shift, domain adaptation, minimax rates) + capstone   Pick one recent theoretical ML paper (2023–2026) from NeurIPS/ICML/COLT. Write a 4-page critical summary. This is your capstone.
+  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Pass 2 deliverables
+
+-   Concentration inequality cheat sheet — every inequality with its proof sketch on a single page.
+
+-   A proof portfolio: the full proofs of the 5 most important theorems in Pass 2 (your choice, but must include the Fundamental Theorem restatement, the Rademacher generalization bound, the implicit-bias result for logistic regression, an NTK derivation, and an online learning regret bound).
+
+-   A capstone paper critique — 4 pages, publication-style writing.
+
+How to actually study this material
+
+The 4-pass method per lecture
+
+-   Pass 1 — Watch the lecture at 1x speed. Take rough notes. Do not pause to understand proofs fully; just follow.
+
+-   Pass 2 — Read the corresponding textbook chapter. Stop at every theorem. Write the statement in your own words. Skip to Pass 3 before trying to understand the proof.
+
+-   Pass 3 — Close the book. Re-derive the key results on paper. Struggle. Peek only when fully stuck, and only at the next line.
+
+-   Pass 4 — Do 2–3 exercises. If you can't do an exercise, the theorem isn't yet yours. Go back to Pass 3.
+
+What not to do
+
+-   Do not take LaTeX notes during lectures. The goal is thinking, not transcription. Handwrite, and rewrite into LaTeX only if a result matters to you later.
+
+-   Do not skip exercises because 'you understand the proof'. Exercises are where understanding is tested — the rest is illusion.
+
+-   Do not try to code everything. This is theory. A small amount of simulation (e.g. plotting generalization gap vs sample size) is useful as a sanity check, but time spent coding is time not spent proving.
+
+-   Do not skim the non-uniform-learnability or SRM chapters because they feel abstract. They are the connective tissue of the whole theory.
+
+Pacing — realistic expectations
+
+10–15 hours per week is roughly right. If you're doing less than 8, you will forget material faster than you learn it and should slow down rather than stretch the plan thin. If you're doing more than 20, you're probably reading passively rather than proving — cut back and do more exercises.
+
+Books to read alongside (optional but excellent)
+
+-   Mohri, Rostamizadeh & Talwalkar — 'Foundations of Machine Learning'. A harder, more modern alternative to SSBD. Use it as a second opinion when SSBD is unclear.
+
+-   Vershynin — 'High-Dimensional Probability'. Indispensable for Pass 2 Weeks 13–16.
+
+-   Wainwright — 'High-Dimensional Statistics'. For going deeper after Pass 2 ends.
+
+-   Bach — 'Learning Theory from First Principles'. A recent, unified, very clean treatment. Good as a capstone re-read.
+
+Final self-test
+
+At Week 24 you should be able to, on a blank sheet of paper and with no references:
+
+-   State and prove the Fundamental Theorem of Statistical Learning.
+
+-   Derive a generalization bound for linear classifiers using Rademacher complexity.
+
+-   Explain, with a proof sketch, why gradient descent on logistic regression implicitly regularizes toward the max-margin solution.
+
+-   Read a new COLT paper and identify which of the tools above it relies on.
+
+If you can do all four, you have a genuine foundation in theoretical ML — enough to read the modern research literature unaided, and enough to decide whether to go deeper (measure concentration, optimal transport, information theory) or back to applied work with sharper eyes.
+
+Using both plans together
+
+The two plans are designed to run in parallel if you have the time (≈20 hours/week combined), or sequentially if you'd rather focus. My recommendation: start with the applied plan's Phase 1 (8 weeks), then begin Pass 1 of the theoretical plan while continuing Phase 2 of the applied plan. The two reinforce each other — every time you train a model in the applied track, you will have sharper questions about why it works, which the theoretical track helps you answer.
+
+Do not try to master both tracks perfectly in parallel from Week 1 — you will burn out. Pick one as primary and the other as secondary, and swap them at the phase boundaries.
