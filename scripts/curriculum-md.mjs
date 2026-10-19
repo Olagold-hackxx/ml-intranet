@@ -9,12 +9,13 @@ for (const track of ["applied", "theory"]) {
   out.push(`## ${track === "applied" ? "Applied ML" : "Theoretical ML"} — ${ps.length} projects, ${ps.reduce((s, p) => s + p.tasks.length, 0)} tasks, ${ps.reduce((s, p) => s + p.days, 0)} days`, "");
   let phase = "";
   for (const p of ps) {
-    if (p.phase !== phase) { phase = p.phase; out.push("", `### ${phase}`, "", "| ID | Project | Days | Lectures | Tasks (mandatory / advanced / written) | Repo / dir |", "|---|---|---|---|---|---|"); }
+    if (p.phase !== phase) { phase = p.phase; out.push("", `### ${phase}`, "", "| ID | Project | Days | Lectures | Textbooks | Tasks (mandatory / advanced / written) | Repo / dir |", "|---|---|---|---|---|---|---|"); }
     const m = p.tasks.filter((t) => t.type === "mandatory").length;
     const a = p.tasks.length - m;
     const w = p.tasks.filter((t) => t.kind === "written").length;
     const src = (p.sources || []).map((s) => `${s.course} ${s.lectures || ""}`.trim()).join("; ");
-    out.push(`| ${p.id} | ${p.title} | ${p.days} | ${src} | ${m} / ${a} / ${w} | ${p.repo ? `\`${p.repo}/${p.dir}\`` : "—"} |`);
+    const bk = (p.books || []).map((b) => `${b.book === "FOML" ? "FoML" : b.book === "ESL" ? "ESL" : "SSBD"} ${b.ch}`).join("; ") || "—";
+    out.push(`| ${p.id} | ${p.title} | ${p.days} | ${src} | ${bk} | ${m} / ${a} / ${w} | ${p.repo ? `\`${p.repo}/${p.dir}\`` : "—"} |`);
   }
   out.push("");
 }

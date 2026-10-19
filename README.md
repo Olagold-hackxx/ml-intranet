@@ -13,7 +13,8 @@ combines them with how Stanford, MIT, CMU and Berkeley grade ML courses, and add
 | | |
 |---|---|
 | **Programs** | Applied ML (6 months) · Theoretical ML (6 months) · **Applied + Theory, interleaved (12 months)** |
-| **Content** | 77 projects · 517 tasks (321 auto-checked code, 196 reviewed written) · 297 quiz questions · 242 Python tests |
+| **Content** | 77 projects · 543 tasks (321 auto-checked code, 222 reviewed written) · 297 quiz questions · 242 Python tests |
+| **Textbooks** | *Elements of Statistical Learning* (ESL II) · *Foundations of Machine Learning* (FoML) · *Understanding Machine Learning* (SSBD), mapped chapter by chapter to 52 projects, with 26 optional exercise sets |
 | **Courses** | CS229 · CS221 · CS230 · CS231N · CS224N · CS224U · CS236 · CS234 · CS329H · CS336 · CME295 · CME296 · LLM Evaluation & Scaling · Ben-David's *Understanding ML* · CS229M |
 | **Deadlines** | 100% before the 1st deadline · 65% before the 2nd · 0% after |
 | **Score** | ALX formula: `Mandatory × (1 + Advanced)`, up to 200% |
@@ -30,6 +31,9 @@ combines them with how Stanford, MIT, CMU and Berkeley grade ML courses, and add
 - **Written work.** Submit a PDF/Markdown/LaTeX file in your repo or a Medium link. The submission time sets the deadline multiplier.
   Then get reviewed against a fixed rubric by **Claude** (your own API key), a **peer** (shareable link with a tamper-evident return code)
   or **yourself** (capped at 80%).
+- **Textbooks.** The **Library** page has the three free textbooks and a reading plan for each. Every project shows the exact
+  chapters and sections to read: ESL II for the statistical and applied side (SLT), FoML for computational learning theory (COLT), and SSBD for both.
+  Many projects also have an optional *textbook exercises* task.
 - **Standing.** Your average is weighted by project size. Month 1 needs ≥ 80%, later months ≥ 70%.
   Falling below gives a *Warning*; two finished months below in a row means *Probation*.
 - **Laxity report.** The dashboard shows points lost to late multipliers, mandatory tasks missed, days idle, and a Captain's-log streak.
@@ -65,7 +69,7 @@ assets/js/scoring.js       ALX formula, deadline multipliers, average, standing,
 assets/js/checker.js       GitHub API checker + Pyodide test runner (pyworker.js)
 assets/js/reviewer.js      Claude / peer review; rubrics.js holds the rubrics
 assets/js/config.js        RULES (deadlines, breaks, thresholds), programs, course playlists
-data/*.js                  the curriculum (one file per phase)
+data/*.js                  the curriculum (one file per phase); data/books.js maps textbook chapters to projects
 scripts/validate.mjs       curriculum validator (runs in CI)
 docs/                      grading policy, learner guide, curriculum, schema, research
 ```

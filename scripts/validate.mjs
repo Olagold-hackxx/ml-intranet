@@ -38,6 +38,15 @@ if (files.length === 0) {
 }
 
 const ids = new Set();
+const { BOOKS, READINGS } = await import(pathToFileURL(path.resolve("data/books.js")).href);
+if (files.length === 0) {
+  const all = new Set(projects.map((p) => p.id));
+  for (const [id, spec] of Object.entries(READINGS)) {
+    if (!all.has(id)) err(`books.js`, `unknown project ${id}`);
+    for (const rd of spec.read) if (!BOOKS[rd.book]) err(`books.js ${id}`, `unknown book ${rd.book}`);
+    if (spec.ex && !BOOKS[spec.ex.book]) err(`books.js ${id}`, `unknown book ${spec.ex.book}`);
+  }
+}
 for (const p of projects) {
   const at = p.id || "(no id)";
   for (const k of ["id", "track", "phase", "title", "days", "sources", "resources", "concepts", "objectives", "tasks"]) {

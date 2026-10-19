@@ -1,4 +1,5 @@
 import ALL_PROJECTS from "../../data/index.js";
+import { BOOKS } from "../../data/books.js";
 import { RULES, PROGRAMS, COURSES, playlistUrl, GENERAL_REQUIREMENTS } from "./config.js";
 import { loadState, saveState, loadSecrets, saveSecrets, exportState, importState, pushGist, pullGist, findGist, emptyState } from "./state.js";
 import {
@@ -60,6 +61,7 @@ const NAV = [
   ["dashboard", "#/", "home", "Dashboard"],
   ["projects", "#/projects", "grid", "Projects"],
   ["planning", "#/planning", "calendar", "Planning"],
+  ["library", "#/library", "book", "Library"],
   ["breaks", "#/breaks", "coffee", "Breaks"],
   ["rules", "#/rules", "scale", "Rules & grading"],
   ["settings", "#/settings", "gear", "Settings"],
@@ -70,7 +72,7 @@ function setChrome(route) {
   const openCount = ov ? ov.rows.filter((r) => r.status === "open" || r.status === "second").length : 0;
   const bank = state.profile ? breakBank(state).available : 0;
   $("#nav").innerHTML = state.profile ? `<div class="nav-label">Learn</div>` + NAV.map(([k, href, ic, label], i) =>
-    `${i === 4 ? `<div class="nav-label">Program</div>` : ""}<a href="${href}" class="${route === k || (route === "project" && k === "projects") ? "active" : ""}">${icon(ic)}<span>${label}</span>${k === "projects" && openCount ? `<span class="count">${openCount}</span>` : ""}${k === "breaks" && bank ? `<span class="count">${bank}d</span>` : ""}</a>`).join("") : "";
+    `${i === 5 ? `<div class="nav-label">Program</div>` : ""}<a href="${href}" class="${route === k || (route === "project" && k === "projects") ? "active" : ""}">${icon(ic)}<span>${label}</span>${k === "projects" && openCount ? `<span class="count">${openCount}</span>` : ""}${k === "breaks" && bank ? `<span class="count">${bank}d</span>` : ""}</a>`).join("") : "";
   $("#menu-btn").innerHTML = icon("menu");
   $("#search-btn").innerHTML = `${icon("search", "sm")}<span class="lbl">Search projects</span><kbd>⌘K</kbd>`;
   $("#search-btn").hidden = !state.profile;
@@ -87,7 +89,7 @@ function setChrome(route) {
   const brk = currentBreak(state);
   const lv = LEVEL[ov.standing.level];
   $("#top-right").innerHTML = `${brk ? `<span class="pill p-warn">${icon("coffee", "sm")} On break</span>` : ""}<span class="pill ${lv[1]}"><span class="dot"></span>${lv[0]}</span><span class="pill p-outline keep">Avg <b>${pct(ov.average)}</b></span>`;
-  const names = { dashboard: "Dashboard", projects: "Projects", planning: "Planning", breaks: "Breaks", rules: "Rules & grading", settings: "Settings", peer: "Peer review" };
+  const names = { library: "Library", dashboard: "Dashboard", projects: "Projects", planning: "Planning", breaks: "Breaks", rules: "Rules & grading", settings: "Settings", peer: "Peer review" };
   let crumb = names[route] || "";
   if (route === "project") {
     const id = location.hash.split("/")[2];
@@ -106,7 +108,7 @@ document.addEventListener("click", (e) => {
 });
 
 // ---------------- router ----------------
-const routes = { "": viewDashboard, projects: viewProjects, project: viewProject, planning: viewPlanning, breaks: viewBreaks, rules: viewRules, settings: viewSettings, peer: viewPeer };
+const routes = { "": viewDashboard, library: viewLibrary, projects: viewProjects, project: viewProject, planning: viewPlanning, breaks: viewBreaks, rules: viewRules, settings: viewSettings, peer: viewPeer };
 const currentRoute = () => location.hash.replace(/^#\/?/, "").split("/")[0] || "dashboard";
 
 function render() {
@@ -482,6 +484,7 @@ function viewProject(id) {
         <div><div class="eyebrow" style="margin-bottom:8px">Watch</div><div class="res">${lectures || `<span class="muted small">—</span>`}</div></div>
         <div><div class="eyebrow" style="margin-bottom:8px">Read</div><div class="res">${resources || `<span class="muted small">—</span>`}</div></div>
       </div>
+      ${(p.books || []).length ? `<div class="section"><div class="eyebrow" style="margin-bottom:8px">Textbooks</div><div class="books">${p.books.map((b) => `<a class="bookref" href="${BOOKS[b.book].url}" target="_blank" rel="noopener"><span class="pill ${b.book === "ESL" ? "p-accent" : b.book === "FOML" ? "p-theory" : "p-info"}">${BOOKS[b.book].short}</span><span><b>${esc(b.ch)}</b> <span class="muted">— ${esc(b.topic)}</span></span></a>`).join("")}</div></div>` : ""}
       <div class="section"><div class="eyebrow" style="margin-bottom:8px">Concepts</div><div class="chips">${(p.concepts || []).map((c) => `<span class="pill p-outline">${esc(c)}</span>`).join("")}</div></div>
       <details class="fold" ${doneCount === 0 ? "open" : ""}><summary>Learning objectives</summary>
         <p class="small muted" style="margin:8px 0 4px">By the end of this project you should be able to explain to anyone, without looking anything up:</p>
@@ -857,6 +860,35 @@ viewPeer.bind_ = (payload) => {
     } catch (err) { toast(err.message, 4000); }
   };
 };
+
+// ---------------- library ----------------
+function viewLibrary() {
+  const uses = (k) => projects.filter((p) => (p.books || []).some((b) => b.book === k));
+  const exCount = (k) => projects.reduce((s, p) => s + p.tasks.filter((t) => t.source === "book" && t.title.includes(BOOKS[k].short + " ")).length, 0);
+  const cls = { ESL: "p-accent", FOML: "p-theory", SSBD: "p-info" };
+  return `<div class="page-head"><div><h1>Library</h1><p>The three core textbooks, all free from their authors. Every project lists the exact chapters to read; many add optional end-of-chapter exercises.</p></div></div>
+  <div class="grid g3">${Object.entries(BOOKS).map(([k, b]) => `<div class="card book-card">
+      <div class="book-spine ${k.toLowerCase()}"><span>${b.short}</span></div>
+      <div class="row" style="margin-top:14px"><span class="pill ${cls[k]}">${b.role}</span><span class="spacer"></span><span class="xs muted">${uses(k).length} projects · ${exCount(k) ? `${exCount(k)} exercise sets` : "exercises built into theory tasks"}</span></div>
+      <h2 style="margin:10px 0 2px">${esc(b.title)}</h2><div class="small soft">${esc(b.authors)}</div>
+      <p class="small soft">${esc(b.blurb)}</p>
+      <div class="row"><a class="btn primary" href="${b.url}" target="_blank" rel="noopener">${icon("book", "sm")} Open PDF</a><a class="btn ghost" href="${b.home}" target="_blank" rel="noopener">Book site</a></div></div>`).join("")}</div>
+  ${Object.entries(BOOKS).map(([k, b]) => {
+    const list = uses(k);
+    if (!list.length) return "";
+    return `<div class="phase"><div class="phase-head"><span class="pill ${cls[k]}">${b.short}</span><h2>Reading plan</h2><span class="xs muted">in release order</span></div>
+    <div class="card list-card">${list.map((p) => {
+      const rd = p.books.filter((x) => x.book === k);
+      const t = slotTimes(state, slots.get(p.id));
+      const ex = p.tasks.find((x) => x.source === "book" && x.title.includes(b.short + " "));
+      return `<a class="prow lib" href="#/project/${p.id}"><span class="mono xs muted">${p.id}</span>
+        <span class="pt"><b>${rd.map((x) => esc(x.ch)).join(" · ")}</b><span>${rd.map((x) => esc(x.topic)).join(" · ")}</span></span>
+        <span class="dates">${esc(p.title)}</span>
+        <span class="st">${ex ? `<span class="pill p-outline">${icon("pen", "sm")} exercises</span>` : ""}</span>
+        <span class="xs muted" style="justify-self:end">${fmtDayShort(t.release)}</span></a>`;
+    }).join("")}</div></div>`;
+  }).join("")}`;
+}
 
 // ---------------- planning ----------------
 function viewPlanning() {
