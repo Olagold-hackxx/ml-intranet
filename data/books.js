@@ -9,7 +9,7 @@ export const BOOKS = {
     short: "ESL II",
     title: "The Elements of Statistical Learning (2nd ed., 12th printing)",
     authors: "Hastie, Tibshirani & Friedman",
-    url: "https://hastie.su.domains/ElemStatLearn/printings/ESLII_print12_toc.pdf",
+    url: "https://hastie.su.domains/ElemStatLearn/printings/ESLII_print12_toc.pdf.download.html",
     home: "https://hastie.su.domains/ElemStatLearn/",
     role: "SLT · Applied",
     blurb: "The statistician's view of supervised and unsupervised learning: linear methods, model assessment, trees, boosting, kernels, high dimensions.",
@@ -20,6 +20,7 @@ export const BOOKS = {
     authors: "Mohri, Rostamizadeh & Talwalkar",
     url: "https://cs.nyu.edu/~mohri/mlbook/",
     home: "https://cs.nyu.edu/~mohri/mlbook/",
+    access: "Book page (MIT Press). Borrow via a library, or use SSBD's matching chapter.",
     role: "COLT",
     blurb: "Computational learning theory with full proofs: PAC, Rademacher & VC bounds, margins, kernels, boosting, online learning, stability, RL.",
   },
@@ -109,7 +110,7 @@ function exerciseTask(project, ex) {
     kind: "written",
     points: 2,
     body:
-      `Solve at least **${ex.n}** end-of-chapter exercises from **Chapter ${ex.ch}** of *${b.title}* (${b.authors}) — [free PDF](${b.url}). ` +
+      `Solve at least **${ex.n}** end-of-chapter exercises from **Chapter ${ex.ch}** of *${b.title}* (${b.authors}) — [${b.access ? "book page" : "free PDF"}](${b.url}). ` +
       `Pick the ones closest to this project's concepts.\n\n` +
       `For each exercise: copy the statement **verbatim** with its book number, then give a complete solution ` +
       `(${theory ? "full proof, every step justified, lemmas cited by name" : "full derivation; where an exercise asks for computation, include the short NumPy script and its output"}). ` +

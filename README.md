@@ -31,7 +31,7 @@ combines them with how Stanford, MIT, CMU and Berkeley grade ML courses, and add
 - **Written work.** Submit a PDF/Markdown/LaTeX file in your repo or a Medium link. The submission time sets the deadline multiplier.
   Then get reviewed against a fixed rubric by **Claude** (your own API key), a **peer** (shareable link with a tamper-evident return code)
   or **yourself** (capped at 80%).
-- **Textbooks.** The **Library** page has the three free textbooks and a reading plan for each. Every project shows the exact
+- **Textbooks.** The **Library** page has the three textbooks (ESL II and SSBD are free from their authors) and a reading plan for each. Every project shows the exact
   chapters and sections to read: ESL II for the statistical and applied side (SLT), FoML for computational learning theory (COLT), and SSBD for both.
   Many projects also have an optional *textbook exercises* task.
 - **Standing.** Your average is weighted by project size. Month 1 needs ≥ 80%, later months ≥ 70%.

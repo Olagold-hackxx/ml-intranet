@@ -866,13 +866,13 @@ function viewLibrary() {
   const uses = (k) => projects.filter((p) => (p.books || []).some((b) => b.book === k));
   const exCount = (k) => projects.reduce((s, p) => s + p.tasks.filter((t) => t.source === "book" && t.title.includes(BOOKS[k].short + " ")).length, 0);
   const cls = { ESL: "p-accent", FOML: "p-theory", SSBD: "p-info" };
-  return `<div class="page-head"><div><h1>Library</h1><p>The three core textbooks, all free from their authors. Every project lists the exact chapters to read; many add optional end-of-chapter exercises.</p></div></div>
+  return `<div class="page-head"><div><h1>Library</h1><p>The three core textbooks. ESL II and SSBD are free from their authors. Every project lists the exact chapters to read; many add optional end-of-chapter exercises.</p></div></div>
   <div class="grid g3">${Object.entries(BOOKS).map(([k, b]) => `<div class="card book-card">
       <div class="book-spine ${k.toLowerCase()}"><span>${b.short}</span></div>
       <div class="row" style="margin-top:14px"><span class="pill ${cls[k]}">${b.role}</span><span class="spacer"></span><span class="xs muted">${uses(k).length} projects · ${exCount(k) ? `${exCount(k)} exercise sets` : "exercises built into theory tasks"}</span></div>
       <h2 style="margin:10px 0 2px">${esc(b.title)}</h2><div class="small soft">${esc(b.authors)}</div>
       <p class="small soft">${esc(b.blurb)}</p>
-      <div class="row"><a class="btn primary" href="${b.url}" target="_blank" rel="noopener">${icon("book", "sm")} Open PDF</a><a class="btn ghost" href="${b.home}" target="_blank" rel="noopener">Book site</a></div></div>`).join("")}</div>
+      ${b.access ? `<p class="xs muted" style="margin-top:-4px">${esc(b.access)}</p>` : ""}<div class="row"><a class="btn primary" href="${b.url}" target="_blank" rel="noopener">${icon("book", "sm")} ${b.access ? "Book page" : "Free PDF"}</a>${b.home !== b.url ? `<a class="btn ghost" href="${b.home}" target="_blank" rel="noopener">Book site</a>` : ""}</div></div>`).join("")}</div>
   ${Object.entries(BOOKS).map(([k, b]) => {
     const list = uses(k);
     if (!list.length) return "";
